@@ -234,7 +234,5 @@ if __name__ == "__main__":
     delete_folder(tempo)
     compress_pdfs_in_folder(destination_folder, del_loc)
     delete_folder(destination_folder)
-    
-    count_folders_and_files(del_loc)
     print("Done with All the Files!")
     
