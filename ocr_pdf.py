@@ -18,6 +18,22 @@ from joblib import Parallel, delayed
 #ghost_script = rf"C:\Program Files\gs\gs10.03.1\bin\gswin64c.exe"
 ghost_script = rf"gs"
 
+def count_pdf_and_pages(folder_path):
+    total_pdf_files = 0
+    total_pdf_pages = 0
+
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.lower().endswith('.pdf'):
+                total_pdf_files += 1
+                file_path = os.path.join(root, file)
+                with open(file_path, 'rb') as f:
+                    pdf_reader = PdfReader(f)
+                    total_pdf_pages += len(pdf_reader.pages)
+                    
+
+    return total_pdf_files, total_pdf_pages
+
 def process_page(pdf_path, page_num, output_folder, dpi):
     pdf_document = fitz.open(pdf_path)
     page = pdf_document.load_page(page_num)
@@ -202,6 +218,12 @@ if __name__ == "__main__":
     source_folder_bk = sys.argv[1]
     destination_folder = sys.argv[2]
     del_loc = sys.argv[2]
+    
+    pdf_count, page_count = count_pdf_and_pages(source_folder)
+
+    print(f"Total PDF files: {pdf_count}")
+    print(f"Total PDF pages: {page_count}")
+    
     if not os.path.exists(destination_folder):
         os.makedirs(destination_folder)
     print("Processing PDFs...")
