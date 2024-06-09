@@ -5,6 +5,7 @@ chmod +x install_mac.sh or chmod +x install_ubuntu.sh
 ./install_mac.sh or ./install_ubuntu.sh
 
 For windows 
+  Install Tesseract (https://digi.bib.uni-mannheim.de/tesseract/?C=M;O=D)
   Install GhostScript ( https://ghostscript.com/releases/gsdnld.html )
 
   Change the installation location in the ocr_pdf.py line 18 of ghost script bin location comment 19th line and uncomment 18th. 
